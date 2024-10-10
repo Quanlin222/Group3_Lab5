@@ -1,4 +1,4 @@
-name: R-CMD-check.yaml
+name: R-CMD-check
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
 
       - name: List Files in the Package Directory
         run: |
-          ls -alh Five  # 列出 Five 目录中的文件以确认 DESCRIPTION 存在
+          ls -alh Five  # List files in the Five directory to confirm DESCRIPTION exists
 
       - name: Cache R packages
         uses: actions/cache@v2
@@ -42,8 +42,8 @@ jobs:
 
       - name: Check Package
         run: |
-          Rscript -e "setwd('Five')"  # 确保工作目录设置为包的目录
-          Rscript -e "devtools::check()"  # 检查包
+          cd Five  # Change directory to the package directory
+          Rscript -e "devtools::check()"  # Check package
 
       - uses: r-lib/actions/check-r-package@v2
         with:
