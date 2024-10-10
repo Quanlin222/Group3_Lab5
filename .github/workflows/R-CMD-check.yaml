@@ -20,15 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: List Files
-        run: |
-          ls -alh Five  # 列出 Five 目录中的文件
+      - name: List Files in Five Directory
+        run: 
+          ls -alh Five 
 
       - name: Cache R packages
         uses: actions/cache@v2
         with:
           path: ~/.cache/R/
-          key: ${{ runner.os }}-R-${{ hashFiles('Five/**/DESCRIPTION') }}  # 更新路径以匹配您的包
+          key: ${{ runner.os }}-R-${{ hashFiles('Five/DESCRIPTION') }} 
           restore-keys: |
             ${{ runner.os }}-R-
 
@@ -44,8 +44,8 @@ jobs:
 
       - name: Check Package
         run: |
-          Rscript -e "setwd('Five')"  # 更改工作目录
-          Rscript -e "devtools::check()"  # 或使用其他包检查函数
+          Rscript -e "setwd('Five')"  
+          Rscript -e "devtools::check()"  
 
       - uses: r-lib/actions/check-r-package@v2
         with:
