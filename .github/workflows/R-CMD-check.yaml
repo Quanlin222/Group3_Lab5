@@ -18,9 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 列出根目录的文件（即 Group3_Lab5 仓库的根目录）
+      - name: List Root Directory
+        run: |
+          ls -alh  # 列出根目录下的文件，确认 Five 目录存在
+
+      # 列出 Five 目录中的文件
       - name: List Files in the Package Directory
         run: |
-          ls -alh Group3_Lab5/Five  # 列出 Five 目录中的文件以确认 DESCRIPTION 存在
+          ls -alh Five  # 确认 Five 目录存在并列出文件
 
       - name: Install Pandoc
         run: |
@@ -30,26 +36,30 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/R/
-          key: ${{ runner.os }}-R-${{ hashFiles('Group3_Lab5/Five/DESCRIPTION') }}
+          key: ${{ runner.os }}-R-${{ hashFiles('Five/DESCRIPTION') }}
           restore-keys: |
             ${{ runner.os }}-R-
 
+      # 设置 R 版本
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
+      # 安装包依赖
       - name: Install Dependencies
         run: |
           Rscript -e "install.packages(c('remotes', 'devtools'))"  # 安装 remotes 和 devtools
           Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"  # 安装其他依赖
-        working-directory: Group3_Lab5/Five  # 确保在 Five 目录下执行
+        working-directory: Five  # 确保在 Five 目录下执行
 
+      # 检查 R 包
       - name: Check Package
         run: |
           Rscript -e "devtools::check()"  # 检查包
-        working-directory: Group3_Lab5/Five  # 确保在 Five 目录下执行
+        working-directory: Five  # 确保在 Five 目录下执行
 
+      # 上传测试快照
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
