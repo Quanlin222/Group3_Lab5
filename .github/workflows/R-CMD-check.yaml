@@ -38,8 +38,9 @@ jobs:
       - name: Install Dependencies
         run: |
           cd Five  # 更改到包目录
-          Rscript -e "install.packages('remotes')"
-          Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"
+          Rscript -e "install.packages('remotes')"  # 安装 remotes 包
+          Rscript -e "install.packages('devtools')"  # 安装 devtools 包
+          Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"  # 安装其他依赖
 
       - name: Check Package
         run: |
