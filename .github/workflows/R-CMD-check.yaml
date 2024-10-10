@@ -41,14 +41,15 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd Five  # 确保进入包的目录
-          Rscript -e "install.packages('remotes')"  # 安装 remotes 包
-          Rscript -e "install.packages('devtools')"  # 安装 devtools 包
+          cd Five  # 进入包的目录
+          Rscript -e "install.packages(c('remotes', 'devtools'))"  # 一次性安装 remotes 和 devtools
           Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"  # 安装其他依赖
 
       - name: Check Package
         run: |
           cd Five  # 确保工作目录设置为包的目录
+          pwd  # 显示当前工作目录
+          ls -alh  # 列出当前目录中的文件
           Rscript -e "devtools::check()"  # 检查包
 
       - uses: r-lib/actions/check-r-package@v2
