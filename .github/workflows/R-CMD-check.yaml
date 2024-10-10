@@ -20,7 +20,7 @@ jobs:
 
       - name: List Files in the Package Directory
         run: |
-          ls -alh Five  # 列出 Five 目录中的文件以确认 DESCRIPTION 存在
+          ls -alh Group3_Lab5/Five  # 列出 Five 目录中的文件以确认 DESCRIPTION 存在
 
       - name: Install Pandoc
         run: |
@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/R/
-          key: ${{ runner.os }}-R-${{ hashFiles('Five/DESCRIPTION') }}
+          key: ${{ runner.os }}-R-${{ hashFiles('Group3_Lab5/Five/DESCRIPTION') }}
           restore-keys: |
             ${{ runner.os }}-R-
 
@@ -41,16 +41,14 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd Five  # 进入包的目录
-          Rscript -e "install.packages(c('remotes', 'devtools'))"  # 一次性安装 remotes 和 devtools
+          Rscript -e "install.packages(c('remotes', 'devtools'))"  # 安装 remotes 和 devtools
           Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"  # 安装其他依赖
+        working-directory: Group3_Lab5/Five  # 确保在 Five 目录下执行
 
       - name: Check Package
         run: |
-          cd Five  # 确保工作目录设置为包的目录
-          pwd  # 显示当前工作目录
-          ls -alh  # 列出当前目录中的文件
           Rscript -e "devtools::check()"  # 检查包
+        working-directory: Group3_Lab5/Five  # 确保在 Five 目录下执行
 
       - uses: r-lib/actions/check-r-package@v2
         with:
