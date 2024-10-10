@@ -22,7 +22,7 @@ jobs:
 
       - name: List Files
         run: |
-          Get-ChildItem Five -Recurse  # 列出 Five 目录中的文件
+          ls -alh Five  # 列出 Five 目录中的文件
 
       - name: Cache R packages
         uses: actions/cache@v2
