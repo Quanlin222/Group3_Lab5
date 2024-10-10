@@ -45,6 +45,9 @@ jobs:
           Rscript -e "devtools::check()"
 
       # 上传测试快照
-      - uses: r-lib/actions/check-r-package@v2
+      - name: Check R Package
+        uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          # 指定工作目录，以确保它能找到 DESCRIPTION 文件
+          working-directory: Five
