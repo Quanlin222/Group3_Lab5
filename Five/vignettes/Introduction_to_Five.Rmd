@@ -1,0 +1,57 @@
+---
+title: "Introduction to the Five Package"
+author: "Quanlin Ren, Qinxia Zhang"
+date: "2024-10-10"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to the Five Package} 
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Overview
+
+The `Five` package provides functionality to connect to the Kolada API, allowing users to access statistical data related to Swedish municipalities. This package includes functions to download data directly from the API in JSON format, process the data, and perform basic filtering and transformations. This document will introduce how to use the package and demonstrate its capabilities.
+
+# Installing and Loading the Package
+
+First, ensure you have the package installed and loaded:
+
+```r
+# Uncomment the line below to install the package if you haven't done so
+# devtools::install_github("Quanlin222/R_Group_3/Five")
+library(Five)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+# Example: Fetching Data from the API
+
+## Using the getdata_api Function 
+
+To fetch data, specify the API URL and a temporary filename for the downloaded data:
+
+url <- "https://jsonplaceholder.typicode.com/todos/1"  # This is a sample URL
+
+filename <- tempfile(fileext = ".json")
+
+## Downloading and Parsing the Data
+
+Call the getdata_api function to download and parse the data from the API:
+
+data <- getdata_api(url, filename)
+
+## Viewing the Fetched Data
+
+You can print the fetched data to see its contents:
+
+print(data)
+
+#Error Handling
+
+The getdata_api function handles errors gracefully. If there are issues such as incorrect URLs or empty responses, it will return NULL and print a warning message.
