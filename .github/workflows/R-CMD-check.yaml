@@ -47,19 +47,19 @@ jobs:
       # 安装包依赖
       - name: Install Dependencies
         run: |
+          cd Five  # 切换到 Five 目录
           Rscript -e "install.packages(c('remotes', 'devtools'))"  # 安装 remotes 和 devtools
           Rscript -e "remotes::install_deps(dependencies = TRUE, upgrade = 'always')"  # 安装其他依赖
-        working-directory: Five  # 确保在 Five 目录下执行
 
       # 检查 R 包
       - name: Check Package
         run: |
+          cd Five  # 切换到 Five 目录
           Rscript -e "devtools::check()"  # 检查包
-        working-directory: Five  # 确保在 Five 目录下执行
 
       # 上传测试快照
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
-        working-directory: Five  # 也确保 check-r-package 的 working-directory 是 Five
+      # 不需要 working-directory 选项
