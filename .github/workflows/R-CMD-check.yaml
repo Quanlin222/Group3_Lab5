@@ -39,8 +39,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          Rscript -e "install.packages('pak')"
-          Rscript -e "pak::pkg_install(dependencies = TRUE)"
+          Rscript -e "install.packages('remotes')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
