@@ -1,0 +1,23 @@
+Encoding: UTF-8
+Package: Five
+Type: Package
+Title: A package connecting to a web API
+Version: 1.0
+Date: 2024-10-04
+Author: Quanlin Ren <renqu711@student.liu.se>, Qinxia Zhang <qinzh916@student.liu.se>
+Maintainer: Quanlin Ren <renqu711@student.liu.se>
+Description: This package provides functionality to connect to the Kolada API, allowing users to access statistical data related to Swedish municipalities. The package includes functions to download data directly from the API in JSON format, process the data, and perform basic filtering and transformations. It is designed to facilitate data analysis and visualization tasks related to municipal key indicators.
+License: GPL-3
+RoxygenNote: 7.3.2
+Imports:
+    downloader,
+    jsonlite
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+
+
+
