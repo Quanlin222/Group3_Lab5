@@ -22,6 +22,10 @@ jobs:
         run: |
           ls -alh Five  # 列出 Five 目录中的文件以确认 DESCRIPTION 存在
 
+      - name: Install Pandoc
+        run: |
+          brew install pandoc  # 使用 Homebrew 安装 Pandoc
+
       - name: Cache R packages
         uses: actions/cache@v2
         with:
